@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+        .card {
+            margin-top: 100px;
+        }
+        .scrollbox{
+            height:300px;
+            width:80%;
+            overflow:auto;
+            border:8px solid darkgray;
+            padding:2%;
+            margin-left: 100px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        #gold{
+            color: gold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <p id='gold' class="navbar-brand">Your Gold: {{ request.session.gold }}</p>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Features -->
+        <div class="row text-center">
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Farm</h4>
+                        <h6>(earns 10-20 golds)</h6>
+                        <form action="/process" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="building" value="farm" />
+                            <input type="submit" value="Find Gold!" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Cave</h4>
+                        <h6>(earns 5-10 golds)</h6>
+                        <form action="/process" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="building" value="cave" />
+                            <input type="submit" value="Find Gold!" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>House</h4>
+                        <h6>(earns 2-5 golds)</h6>
+                        <form action="/process" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="building" value="house" />
+                            <input type="submit" value="Find Gold!" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4>Casino</h4>
+                        <h6>(earns/takes 0-50 golds)</h6>
+                        <form action="/process" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="building" value="casino" />
+                            <input type="submit" value="Find Gold!" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+    <div class="scrollbox">
+        {{request.session.activity|safe}}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</body>
+
+<script>
+    $(".scrollbox").scrollTop(10000000000000000);
+</script>
+
+</html>
